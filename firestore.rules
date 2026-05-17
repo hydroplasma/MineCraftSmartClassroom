@@ -1,0 +1,72 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() { return request.auth != null; }
+
+    function isValidSchoolConfig(data) {
+      return data.keys().hasAny(['schoolName']) &&
+        (data.get('schoolName', '') is string);
+    }
+    
+    function isValidCourse(data) {
+      return data.keys().hasAny(['id', 'code', 'name']) &&
+        (data.get('code', '') is string) &&
+        (data.get('name', '') is string);
+    }
+    
+    function isValidStudent(data) {
+      return data.keys().hasAny(['id', 'studentId', 'name', 'status']) &&
+        (data.get('studentId', '') is string) &&
+        (data.get('name', '') is string);
+    }
+    
+    function isValidEnrollment(data) {
+        return data.keys().hasAny(['studentIds']) &&
+            (data.get('studentIds', []) is list);
+    }
+
+    function isValidSchedule(data) {
+        return data.keys().hasAny(['periods']) &&
+            (data.get('periods', []) is list);
+    }
+
+    match /config/{docId} {
+      allow read: if true;
+      allow create: if isValidSchoolConfig(request.resource.data);
+      allow update: if isValidSchoolConfig(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /courses/{courseId} {
+      allow read: if true;
+      allow create: if isValidCourse(request.resource.data);
+      allow update: if isValidCourse(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /students/{studentDocId} {
+      allow read: if true;
+      allow create: if isValidStudent(request.resource.data);
+      allow update: if isValidStudent(request.resource.data);
+      allow delete: if true;
+    }
+
+    match /enrollments/{courseId} {
+      allow read: if true;
+      allow create: if isValidEnrollment(request.resource.data);
+      allow update: if isValidEnrollment(request.resource.data);
+      allow delete: if true;
+    }
+    
+    match /schedules/{day} {
+      allow read: if true;
+      allow create: if isValidSchedule(request.resource.data);
+      allow update: if isValidSchedule(request.resource.data);
+      allow delete: if true;
+    }
+  }
+}

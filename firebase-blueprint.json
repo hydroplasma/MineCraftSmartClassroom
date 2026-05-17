@@ -1,0 +1,107 @@
+{
+  "entities": {
+    "SchoolConfig": {
+      "title": "SchoolConfig",
+      "description": "Global school configuration like school name",
+      "type": "object",
+      "properties": {
+        "schoolName": { "type": "string" }
+      },
+      "required": ["schoolName"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "A class or subject",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "credits": { "type": "number" },
+        "periods": { "type": "number" },
+        "color": { "type": "string" },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "number" },
+              "name": { "type": "string" },
+              "maxScore": { "type": "number" },
+              "description": { "type": "string" },
+              "dueDate": { "type": "string" },
+              "submissionMethod": { "type": "string" },
+              "learningMaterialUrl": { "type": "string" }
+            }
+          }
+        },
+        "midtermMaxScore": { "type": "number" },
+        "finalMaxScore": { "type": "number" },
+        "teacher": { "type": "string" },
+        "room": { "type": "string" }
+      },
+      "required": ["id", "code", "name", "credits", "periods", "color", "midtermMaxScore", "finalMaxScore"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Student details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "studentId": { "type": "string" },
+        "name": { "type": "string" },
+        "class": { "type": "string" },
+        "status": { "type": "string" },
+        "time": { "type": ["string", "null"] },
+        "scores": { "type": "object" }
+      },
+      "required": ["id", "studentId", "name", "class", "status"]
+    },
+    "Enrollment": {
+      "title": "Enrollment",
+      "description": "Mapping from course ID to array of student IDs",
+      "type": "object",
+      "properties": {
+        "studentIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["studentIds"]
+    },
+    "Schedule": {
+        "title": "Schedule",
+        "description": "Weekly schedule mapping day to periods",
+        "type": "object",
+        "properties": {
+            "periods": {
+                "type": "array",
+                "items": { "type": ["number", "null"] }
+            }
+        },
+        "required": ["periods"]
+    }
+  },
+  "firestore": {
+    "config/{docId}": {
+      "schema": { "$ref": "#/entities/SchoolConfig" },
+      "description": "Stores school configuration like schoolName."
+    },
+    "courses/{courseId}": {
+      "schema": { "$ref": "#/entities/Course" },
+      "description": "Stores all course details."
+    },
+    "students/{studentDocId}": {
+      "schema": { "$ref": "#/entities/Student" },
+      "description": "Stores student details including their scores."
+    },
+    "enrollments/{courseId}": {
+      "schema": { "$ref": "#/entities/Enrollment" },
+      "description": "Stores enrollments for a course."
+    },
+    "schedules/{day}": {
+      "schema": { "$ref": "#/entities/Schedule" },
+      "description": "Stores schedule for a specific day."
+    }
+  }
+}
