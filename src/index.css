@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Noto Sans Thai', sans-serif;
+  text-shadow: none !important;
+}
+
+body {
+  background-image: 
+    linear-gradient(rgba(139, 90, 43, 0.4), rgba(93, 58, 26, 0.6)),
+    repeating-linear-gradient(
+      0deg,
+      #8B5A2B 0px,
+      #8B5A2B 16px,
+      #7A4E24 16px,
+      #7A4E24 32px
+    );
+  background-attachment: fixed;
+  image-rendering: pixelated;
+  min-height: 100vh;
+}
+
+.minecraft-border {
+  border: 4px solid #000000;
+  box-shadow: 
+    inset -4px -4px 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 rgba(255,255,255,0.2);
+}
+
+.pixel-shadow {
+  box-shadow: 
+    4px 4px 0 rgba(0,0,0,0.4),
+    inset -4px -4px 0 rgba(0,0,0,0.2),
+    inset 4px 4px 0 rgba(255,255,255,0.3);
+}
+
+.btn-mc {
+  position: relative;
+  border: 4px solid #000000;
+  background: #7A7A7A;
+  box-shadow: 
+    inset -4px -4px 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 rgba(255,255,255,0.3);
+  transition: all 0.1s;
+  color: #FFFFFF;
+  font-weight: 700;
+  text-shadow: none !important;
+}
+
+.btn-mc:active {
+  transform: translate(2px, 2px);
+  box-shadow: 
+    inset -2px -2px 0 rgba(0,0,0,0.3),
+    inset 2px 2px 0 rgba(255,255,255,0.3);
+}
+
+.btn-mc-green { background: #4CAF50; color: #FFFFFF; }
+.btn-mc-green:hover { background: #5CBF60; }
+.btn-mc-red { background: #D32F2F; color: #FFFFFF; }
+.btn-mc-red:hover { background: #E33F3F; }
+.btn-mc-yellow { background: #FFC107; color: #000000; }
+.btn-mc-yellow:hover { background: #FFD54F; }
+.btn-mc-blue { background: #2196F3; color: #FFFFFF; }
+.btn-mc-blue:hover { background: #42A5F5; }
+
+.input-mc-light {
+  background: #F5DEB3;
+  border: 4px solid #000000;
+  color: #000000;
+  font-weight: 600;
+  padding: 12px;
+  font-size: 16px;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.2);
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.input-mc-light::placeholder { color: #666666; opacity: 1; }
+.input-mc-light:focus {
+  outline: none;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.3), 0 0 0 2px #4CAF50;
+}
+
+.input-mc-dark {
+  background: #5D3A1A;
+  border: 4px solid #000000;
+  color: #F5DEB3;
+  font-weight: 600;
+  padding: 12px;
+  font-size: 16px;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.3);
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.input-mc-dark::placeholder { color: #B8B8B8; opacity: 1; }
+.input-mc-dark:focus {
+  outline: none;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.4), 0 0 0 2px #4CAF50;
+}
+
+select.input-mc-light { color: #000000; font-weight: 600; }
+select.input-mc-light option { background: #F5DEB3; color: #000000; font-weight: 600; }
+select.input-mc-dark { color: #F5DEB3; font-weight: 700; }
+select.input-mc-dark option { background: #5D3A1A; color: #F5DEB3; font-weight: 700; }
+
+.card-mc {
+  background: #8B5A2B;
+  border: 4px solid #000000;
+  box-shadow: 
+    inset -4px -4px 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 rgba(255,255,255,0.2),
+    4px 4px 0 rgba(0,0,0,0.4);
+}
+
+.card-mc-light {
+  background: #E8D5B7;
+  border: 4px solid #000000;
+  box-shadow: 
+    inset -4px -4px 0 rgba(0,0,0,0.2),
+    inset 4px 4px 0 rgba(255,255,255,0.3),
+    4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.modal-backdrop {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+}
+
+.stat-block {
+  background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+  border: 4px solid #000000;
+  box-shadow: 
+    inset -4px -4px 0 rgba(0,0,0,0.3),
+    inset 4px 4px 0 rgba(255,255,255,0.2);
+}
+
+.stat-block-red { background: linear-gradient(135deg, #D32F2F 0%, #C12727 100%); }
+.stat-block-yellow { background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%); }
+.stat-block-blue { background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); }
+
+.student-row { transition: all 0.2s; }
+.student-row:hover { transform: translateX(4px); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.badge-present { background: #4CAF50; color: #FFFFFF; border: 2px solid #000000; font-weight: 700; text-shadow:none;}
+.badge-absent { background: #D32F2F; color: #FFFFFF; border: 2px solid #000000; font-weight: 700; text-shadow:none;}
+.badge-late { background: #FFC107; color: #000000; border: 2px solid #000000; font-weight: 700; text-shadow:none;}
+.badge-leave { background: #2196F3; color: #FFFFFF; border: 2px solid #000000; font-weight: 700; text-shadow:none;}
+
+label, h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+  text-shadow: none !important;
+}
